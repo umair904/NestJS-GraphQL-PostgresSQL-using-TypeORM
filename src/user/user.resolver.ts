@@ -24,7 +24,7 @@ export class UserResolver {
     }
 
     @Mutation(returns => String, {name: 'CreateUser'})
-    createUser(@Args({name: 'CreateUserArgs', type:()=> AddUserArgs}) addUserArgs: AddUserArgs){
+    createUser(@Args({name: 'CreateUserArgs'}) addUserArgs: AddUserArgs){
         return this.userService.createUser(addUserArgs)
     }
 
