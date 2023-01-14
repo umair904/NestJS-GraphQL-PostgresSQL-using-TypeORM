@@ -22,12 +22,20 @@ export class UserService {
     }
 
     async deleteUser(id: number) : Promise<string>{
+        let user = await this.userRepo.findOne({where:{id}})
+        if (!user){
+            return 'No user found against the given ID'
+        }
         await this.userRepo.delete(id)
-        return 'User deleted Successfully!'
+        return 'User deleted successfully'
     }
 
     async createUser(addUserArgs : AddUserArgs) : Promise<string>{
         let user : User = new User();
+        let checkEmailRegisterd = await this.userRepo.findOne({where:{email:addUserArgs.email}})
+        if (checkEmailRegisterd){
+            return 'Email Already Registered'
+        }
         user.email = addUserArgs.email;
         user.fullName = addUserArgs.fullName;
         user.password = addUserArgs.password;
