@@ -10,8 +10,7 @@ export class User {
   id: number;
 
   @Column({
-    nullable: false,
-    default: '',
+    nullable: false
   })
   @Field()
   fullName: string;
